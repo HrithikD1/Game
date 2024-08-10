@@ -24,7 +24,10 @@ int main(int argc, char* argv[]) {
 
     // Initialize SDL_ttf
     if (TTF_Init() == -1) {
+        printf("SDL_ttf could not initialize! TTF_Error: %s\n", TTF_GetError());
         std::cin.get();
+        IMG_Quit();
+        SDL_Quit();
         return 1;
     }
     
@@ -59,26 +62,13 @@ int main(int argc, char* argv[]) {
         while (SDL_PollEvent(&e) != 0) {
             if (e.type == SDL_QUIT) {
                 quit = true;
-            }
-
-            if (e.type == SDL_KEYDOWN) {
-                switch (e.key.keysym.sym) {
-                    case SDLK_RETURN: // Enter key
-                        std::cout << "Enter pressed!" << std::endl;
-                        break;
-                    case SDLK_ESCAPE: // Escape key to quit
-                        quit = true;
-                        break;
-                    default:
-                        std::cout << "Key pressed: " << SDL_GetKeyName(e.key.keysym.sym) << std::endl;
-                        break;
-                }
+            } else {
+                handleMenuEvent(e, quit);
             }
         }
 
         // Clear screen
-        SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-        SDL_SetRenderDrawColor(renderer, 135, 206, 235, 0);
+        SDL_SetRenderDrawColor(renderer, 135, 206, 235, 255); // Sky blue
         SDL_RenderClear(renderer);
 
         renderMenu(renderer);
