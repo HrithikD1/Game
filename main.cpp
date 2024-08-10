@@ -3,9 +3,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
-#include "level0.h"
+#include "menu.cpp"
 #include <iostream>
-
 
 int main(int argc, char* argv[]) {
     // Initialize SDL
@@ -25,6 +24,7 @@ int main(int argc, char* argv[]) {
     if(!TTF_Init()) {
         return 1;
     }
+    
     // Create window
     SDL_Window* window = SDL_CreateWindow("SDL2 Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, SDL_WINDOW_SHOWN);
     if (window == NULL) {
@@ -57,12 +57,13 @@ int main(int argc, char* argv[]) {
             }
         }
 
-
-        // Clear screen
+        // Clear screen before rendering
         SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(renderer);
 
+        // Render menu
         renderMenu(renderer);
+
         // Update screen
         SDL_RenderPresent(renderer);
     }
