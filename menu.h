@@ -1,15 +1,10 @@
-#ifndef MENU_H
-#define MENU_H
+// menu.h
+#pragma once
 
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_image.h>
-#include "base.cpp"
 
-// Function to render all menu-related sprites
-void renderMenu(SDL_Renderer* renderer);
+enum GameState { MENU, GAMEPLAY, QUIT };
 
-// Function to handle menu-specific events
-void handleMenuEvent(SDL_Event& e, bool &quit);
-
-#endif // MENU_H
+GameState menu();
+GameState gameplay();
+void renderText(const std::string &text, int x, int y);  // This was already correct

@@ -1,13 +1,16 @@
-#include <iostream>
+// base.h
+#pragma once
+
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
+#include <string>
 
-// Function to render text as a texture
-SDL_Texture *renderText(const char *message, const char *fontFile, SDL_Color color, int fontSize, SDL_Renderer *renderer);
+bool init();
+bool loadMedia();
+void close();
+SDL_Texture* loadTexture(const std::string &path);
 
-// Function to load an image as a texture
-SDL_Texture *loadTexture(const char *path, SDL_Renderer *renderer);
-
-// Dummy function to illustrate rendering rectangles (to be implemented)
-void drawRect();
+extern SDL_Window* gWindow;
+extern SDL_Renderer* gRenderer;
+extern TTF_Font* gFont;
